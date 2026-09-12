@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}ログイン | 滑舌クリニック{% endblock %}
+
+{% block content %}
+<div class="max-w-sm mx-auto bg-white border border-gray-200 rounded-lg p-6">
+    <h1 class="text-xl font-bold mb-4">ログイン</h1>
+    <form method="post" action="{{ url_for('auth.login') }}" class="space-y-4">
+        <div>
+            <label class="block text-sm text-gray-600 mb-1" for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" required value="{{ email or '' }}"
+                   class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+        </div>
+        <div>
+            <label class="block text-sm text-gray-600 mb-1" for="password">パスワード</label>
+            <input type="password" id="password" name="password" required
+                   class="w-full border border-gray-300 rounded px-3 py-2 text-sm">
+        </div>
+        <button type="submit" class="w-full bg-indigo-600 text-white rounded py-2 text-sm hover:bg-indigo-700">
+            ログイン
+        </button>
+    </form>
+    {% if show_resend %}
+    <p class="text-sm text-gray-500 mt-4">
+        確認メールが届いていない方は
+        <a href="{{ url_for('auth.registration_sent', email=email) }}" class="text-indigo-600 hover:underline">確認メールを再送</a>
+    </p>
+    {% endif %}
+    <p class="text-sm text-gray-500 mt-4">
+        アカウントをお持ちでない方は
+        <a href="{{ url_for('auth.register') }}" class="text-indigo-600 hover:underline">会員登録</a>
+    </p>
+    <p class="text-sm text-gray-500 mt-1">
+        <a href="{{ url_for('home.index') }}" class="text-indigo-600 hover:underline">ログインせずにゲストとして練習する</a>
+    </p>
+</div>
+{% endblock %}

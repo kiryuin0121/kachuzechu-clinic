@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}確認結果 | 滑舌クリニック{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white border border-gray-200 rounded-lg p-6 text-center">
+    {% if success %}
+        <p class="text-3xl mb-3">✅</p>
+        <h1 class="text-lg font-bold mb-2">確認が完了しました</h1>
+    {% else %}
+        <p class="text-3xl mb-3">⚠️</p>
+        <h1 class="text-lg font-bold mb-2">確認できませんでした</h1>
+    {% endif %}
+    <p class="text-sm text-gray-600 mb-6">{{ message }}</p>
+    <a href="{{ url_for('auth.login') }}" class="text-indigo-600 hover:underline text-sm">ログイン画面へ</a>
+</div>
+{% endblock %}

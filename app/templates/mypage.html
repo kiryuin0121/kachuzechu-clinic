@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}マイページ | 滑舌クリニック{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">マイページ</h1>
+
+<div class="grid grid-cols-2 gap-4 mb-6">
+    <div class="bg-white border border-gray-200 rounded-lg p-4 text-center">
+        <p class="text-xs text-gray-400">総練習回数</p>
+        <p class="text-2xl font-bold">{{ total_practice_count }}回</p>
+    </div>
+    <div class="bg-white border border-gray-200 rounded-lg p-4 text-center">
+        <p class="text-xs text-gray-400">練習したお題の数</p>
+        <p class="text-2xl font-bold">{{ practiced_twister_count }}件</p>
+    </div>
+</div>
+
+{% if total_practice_count == 0 %}
+<p class="text-gray-500">まだ練習履歴がありません。お題を選んで練習してみましょう。</p>
+{% endif %}
+{% endblock %}

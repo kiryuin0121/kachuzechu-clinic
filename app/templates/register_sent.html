@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}確認メール送信済み | 滑舌クリニック{% endblock %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white border border-gray-200 rounded-lg p-6">
+    <h1 class="text-lg font-bold mb-2 text-center">確認メールを送信しました</h1>
+    <p class="text-sm text-gray-600 text-center">
+        ご入力いただいたメールアドレス宛に確認メールを送信しました。<br>
+        メール内のリンクをクリックすると、登録が完了しログイン状態へと移行します。
+    </p>
+
+    <div class="border-t border-gray-200 mt-6 pt-4">
+        <p class="text-sm font-semibold mb-1">メールが届かない場合</p>
+        <p class="text-xs text-gray-500 mb-3">
+            迷惑メールフォルダをご確認ください。それでも届いていない場合や、リンクの有効期限（30分）が切れた場合は、
+            登録したメールアドレスを入力して再送してください。
+        </p>
+        <form method="post" action="{{ url_for('auth.resend_verification') }}" class="flex gap-2">
+            <input type="email" name="email" required value="{{ email or '' }}" placeholder="登録したメールアドレス"
+                   class="flex-1 border border-gray-300 rounded px-3 py-2 text-sm">
+            <button type="submit" class="bg-gray-100 border border-gray-300 rounded px-4 py-2 text-sm hover:bg-gray-200">
+                再送する
+            </button>
+        </form>
+    </div>
+
+    <p class="text-sm text-gray-500 mt-4 text-center">
+        <a href="{{ url_for('auth.login') }}" class="text-indigo-600 hover:underline">ログイン画面へ</a>
+    </p>
+</div>
+{% endblock %}

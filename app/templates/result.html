@@ -1,0 +1,46 @@
+<!--
+    採点結果の表示エリア（practice.htmlからincludeされる部分テンプレート）。
+
+    ページ遷移せず、JavaScript側が /practice/score のJSONレスポンスを使って
+    この中の要素（id属性で指定した箇所）へ内容を書き込んでいく想定。
+    そのため最初は hidden で非表示にしておき、採点成功時にJSがhiddenを外す。
+-->
+<div id="result-section" hidden class="mt-6 border-t border-gray-200 pt-6">
+    <h2 class="text-xl font-bold mb-4">採点結果</h2>
+
+    <div class="grid grid-cols-3 gap-3 text-center mb-6">
+        <div class="bg-indigo-50 rounded-lg p-4">
+            <p class="text-xs text-gray-500 mb-1">総合スコア</p>
+            <p id="result-total-score" class="text-3xl font-bold text-indigo-600">-</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <p class="text-xs text-gray-500 mb-1">正確さ</p>
+            <p id="result-accuracy-score" class="text-2xl font-semibold">-</p>
+        </div>
+        <div class="bg-white border border-gray-200 rounded-lg p-4">
+            <p class="text-xs text-gray-500 mb-1">発話速度</p>
+            <p id="result-speed-score" class="text-2xl font-semibold">-</p>
+        </div>
+    </div>
+
+    <p class="text-sm text-gray-600 mb-4">
+        録音時間: <span id="result-duration">-</span>秒 ／
+        目標時間: <span id="result-target-duration">-</span>秒
+        （<span id="result-repeat-count">-</span>回連続分の合計）
+    </p>
+
+    <div class="mb-4">
+        <p class="text-sm font-semibold text-gray-500 mb-1">Whisperによる音声認識結果</p>
+        <p id="result-transcribed-text" class="bg-gray-50 rounded p-3 text-sm break-words"></p>
+    </div>
+
+    <div class="mb-2">
+        <p class="text-sm font-semibold text-gray-500 mb-1">正解との差異（お題を3回連続でつなげた文字列と比較しています）</p>
+        <p class="text-xs text-gray-400 mb-2">
+            緑: 正しく発話できた部分 / オレンジ(取り消し線): 違う音になった部分 / 赤(取り消し線): 発話できなかった部分 / 青(下線): 余分に発話した部分
+        </p>
+        <p id="result-diff" class="bg-gray-50 rounded p-3 text-lg leading-loose tracking-wide"></p>
+    </div>
+
+    <p id="result-log-message" class="text-xs text-gray-400 mt-2"></p>
+</div>

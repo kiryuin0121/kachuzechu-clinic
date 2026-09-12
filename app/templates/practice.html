@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}練習 | 滑舌クリニック{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('home.difficulty', level=twister.difficulty) }}" class="text-sm text-indigo-600 hover:underline">
+    ← 難易度{{ twister.difficulty }}の一覧に戻る
+</a>
+
+<div class="bg-white border border-gray-200 rounded-lg p-6 mt-4">
+    <p class="text-2xl font-bold mb-2">{{ twister.phrase }}</p>
+    <p class="text-lg text-gray-500 mb-4">{{ twister.furigana }}</p>
+    <div class="flex gap-6 text-sm text-gray-600 mb-3">
+        <span>難易度: {{ twister.difficulty }}</span>
+        <span>目標時間: {{ "%.1f"|format(twister.target_duration) }}秒（{{ repeat_count }}回分の合計）</span>
+    </div>
+    <p class="text-sm bg-indigo-50 text-indigo-700 rounded px-3 py-2">
+        このお題は<strong>{{ repeat_count }}回連続</strong>で、区切らずに続けて言ってください。
+    </p>
+</div>
+
+{% if is_member %}
+<div class="bg-white border border-gray-200 rounded-lg p-6 mt-4">
+    <h2 class="text-sm font-semibold text-gray-500 mb-3">あなたの記録</h2>
+    <div class="grid grid-cols-2 gap-4 text-center mb-4">
+        <div>
+            <p class="text-xs text-gray-400">自己ベスト</p>
+            <p class="text-2xl font-bold text-indigo-600">
+                {% if best_score is not none %}{{ "%.1f"|format(best_score) }}点{% else %}--{% endif %}
+            </p>
+        </div>
+        <div>
+            <p class="text-xs text-gray-400">直近のスコア</p>
+            <p class="text-2xl font-bold">
+                {% if last_log %}{{ "%.1f"|format(last_log.total_score) }}点{% else %}--{% endif %}
+            </p>
+        </div>
+    </div>
+
+    {% if has_audio %}
+    <div>
+        <p class="text-xs text-gray-400 mb-1">現在保存されている最新録音</p>
+        <audio id="latest-audio" controls class="w-full" src="{{ audio_url }}"></audio>
+    </div>
+    {% else %}
+        <p class="text-xs text-gray-400">まだこのお題の録音はありません。</p>
+    {% endif %}
+</div>
+{% endif %}
+
+<div id="recorder" class="bg-white border border-gray-200 rounded-lg p-6 mt-4"
+     data-tongue-twister-id="{{ twister.id }}"
+     data-score-endpoint="{{ url_for('practice.score') }}">
+
+    <div class="flex items-center gap-4">
+        <button id="start-button" type="button"
+                class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">
+            録音開始（{{ repeat_count }}回連続で）
+        </button>
+        <button id="stop-button" type="button" disabled
+                class="px-4 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">
+            録音停止
+        </button>
+        <span class="text-sm text-gray-500">録音時間: <span id="recording-timer">0.0</span>秒</span>
+        <span id="scoring-status" class="text-sm text-gray-600"></span>
+    </div>
+
+    <!-- <p id="scoring-status" class="text-sm text-gray-600 min-h-[1.5em]"></p> -->
+
+    {% include "result.html" %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/recorder.js') }}"></script>
+{% endblock %}

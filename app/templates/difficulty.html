@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}難易度{{ level }}のお題 | 滑舌クリニック{% endblock %}
+
+{% block content %}
+<div class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">難易度 {{ level }} のお題一覧</h1>
+    <a href="{{ url_for('home.index') }}" class="text-sm text-indigo-600 hover:underline">← 難易度選択に戻る</a>
+</div>
+
+{% if tongue_twisters %}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    {% for twister in tongue_twisters %}
+        {% set best_score = best_scores.get(twister.id) %}
+        <a href="{{ url_for('practice.practice', tongue_twister_id=twister.id) }}"
+           class="flex items-center justify-between gap-4 rounded-lg p-4 transition hover:shadow
+                  {% if best_score is not none %}bg-indigo-50 border border-indigo-200  hover:border-indigo-300{% else %}bg-white border border-gray-200 hover:border-indigo-400{% endif %}">
+            <div class="min-w-0">
+                <p class="font-semibold text-lg mb-2 truncate">{{ twister.phrase }}</p>
+                <div class="flex items-center gap-4 text-sm text-gray-500">
+                    <span>難易度: {{ twister.difficulty }}</span>
+                    <span>目標時間: {{ "%.1f"|format(twister.target_duration) }}秒（{{ repeat_count }}回分）</span>
+                </div>
+            </div>
+            {% if best_score is not none %}
+                <div class="shrink-0 text-center">
+                    <p class="text-xs text-gray-400">自己ベスト</p>
+                    <p class="text-lg font-bold text-indigo-600">{{ "%.0f"|format(best_score) }}</p>
+                </div>
+            {% endif %}
+        </a>
+    {% endfor %}
+</div>
+{% else %}
+<p class="text-gray-500">この難易度のお題はまだ登録されていません。</p>
+{% endif %}
+{% endblock %}
