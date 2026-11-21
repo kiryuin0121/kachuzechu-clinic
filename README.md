@@ -1,13 +1,3 @@
-
-
-[![デモ動画](https://img.youtube.com/vi/X25n5NHjBio/hqdefault.jpg)](https://youtu.be/X25n5NHjBio)
-
-
-
----
-
-
-
 # 3校合同学内コンテスト 『滑舌クリニック』
 ## 成果物について
 
