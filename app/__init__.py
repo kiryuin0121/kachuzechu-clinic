@@ -22,7 +22,7 @@ def create_app():
     app.config["DB_PORT"] = int(os.getenv("DB_PORT", "3306"))
     app.config["DB_USER"] = os.getenv("DB_USER", "root")
     app.config["DB_PASSWORD"] = os.getenv("DB_PASSWORD", "")
-    app.config["DB_NAME"] = os.getenv("DB_NAME", "OH_PY23DB_IH12A_38")
+    app.config["DB_NAME"] = os.getenv("DB_NAME", "kachuzechu_db")
 
     # WhisperのapiKey
     app.config["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY", "")

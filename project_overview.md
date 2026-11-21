@@ -17,8 +17,8 @@
 
 ### 手順
 
-1. XAMPPのMySQLを起動し、phpMyAdmin等から `OH_IH12A632_38_横畑希龍_データベース.sql` を実行する
-   - データベース `OH_PY23DB_IH12A_38` と4テーブルが作成され、お題70件が投入されます
+1. XAMPPのMySQLを起動し、phpMyAdmin等から `kachuzechu_db.sql` を実行する
+   - データベース `kachuzechu_db` と4テーブルが作成され、お題70件が投入されます
 
 2. 依存ライブラリをインストールする
 
@@ -37,7 +37,7 @@
    DB_PORT=3306
    DB_USER=root
    DB_PASSWORD=
-   DB_NAME=OH_PY23DB_IH12A_38
+   DB_NAME=kachuzechu_db
 
    MAIL_SERVER=smtp.gmail.com
    MAIL_PORT=587
@@ -74,7 +74,7 @@
 提出フォルダの構成は以下のとおりです。
 
 ```text
-OH_IH12A632_38_横畑希龍_プロジェクトフォルダ/
+kachuzechu_project/
 ├── app.py                                  # 起動スクリプト
 ├── requirements.txt                        # 依存ライブラリ
 └── app/

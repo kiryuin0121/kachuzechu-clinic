@@ -12,7 +12,7 @@ def connect_db() -> mysql.connector.connection.MySQLConnection:
         port=int(current_app.config.get("DB_PORT", 3306)),
         user=current_app.config.get("DB_USER", "root"),
         password=current_app.config.get("DB_PASSWORD", ""),
-        database=current_app.config.get("DB_NAME", "OH_PY23DB_IH12A_38"),
+        database=current_app.config.get("DB_NAME", "kachuzechu_db"),
         autocommit=False,
         charset="utf8mb4",  # 日本語・絵文字対応
     )
